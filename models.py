@@ -3,18 +3,18 @@ from sqlalchemy.orm import relationship, sessionmaker, declarative_base
 
 Base = declarative_base()
 
-class Booking(Base):
-    __tablename__ = 'bookings'
+# class Booking(Base):
+#     __tablename__ = 'bookings'
     
-    booking_id = Column(Integer, primary_key=True)
-    customer_id = Column(Integer, ForeignKey('customers.customer_id'))
-    service_id = Column(Integer, ForeignKey('services.service_id'))
-    booking_date = Column(DateTime)
-    status = Column(String)
+#     booking_id = Column(Integer, primary_key=True)
+#     customer_id = Column(Integer, ForeignKey('customers.customer_id'))
+#     service_id = Column(Integer, ForeignKey('services.service_id'))
+#     booking_date = Column(DateTime)
+#     status = Column(String)
     
-    customer = relationship("Customer", back_populates="bookings")
-    service = relationship("Service", back_populates="bookings")
-    payments = relationship("Payment", back_populates="booking")
+#     customer = relationship("Customer", back_populates="bookings")
+#     service = relationship("Service", back_populates="bookings")
+#     payments = relationship("Payment", back_populates="booking")
 
 class Service(Base):
     __tablename__ = 'services'
