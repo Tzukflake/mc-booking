@@ -3,6 +3,24 @@ from sqlalchemy.orm import relationship, sessionmaker, declarative_base
 
 Base = declarative_base()  # Bas för alla modeller, denna tas från Martinas sen
 
+# Ta bort denna sen
+# class Booking(Base):
+    # __tablename__ = 'bookings'
+    
+    # booking_id = Column(Integer, primary_key=True)
+    # customer_id = Column(Integer, ForeignKey('customers.customer_id'))
+    # service_id = Column(Integer, ForeignKey('services.service_id'))
+    # mechanic_id = Column(Integer, ForeignKey('mechanics.mechanic_id'))
+    # booking_date = Column(DateTime)
+    # status = Column(String)
+    
+    # customer = relationship("Customer", back_populates="bookings")
+    # service = relationship("Service", back_populates="bookings")
+    # mechanic = relationship("Mechanic", back_populates="bookings")
+    # orders = relationship("Order", back_populates="booking")
+    # payments = relationship("Payment", back_populates="booking")
+    # logistics = relationship("Logistic", back_populates="booking")
+
 
 # Klass för logistik
 class Logistics(Base):
@@ -17,7 +35,6 @@ class Logistics(Base):
 
     bookings = relationship('Booking', back_populates='logistics')
 
-
 # Klass för inventarie
 class Inventory(Base):
     __tablename__ = 'inventory'
@@ -28,7 +45,6 @@ class Inventory(Base):
     unit_price = Column(Integer, nullable=False)
 
     orders = relationship('Order', back_populates='inventory')  # Se till att Order-klass är korrekt definierad
-
 
 # Klass för mekaniker
 class Mechanics(Base):
