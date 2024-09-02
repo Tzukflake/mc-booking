@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, Column, Integer, String, Float, ForeignKey, DateTime, VARCHAR
-# from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship,declarative_base
+from datetime import datetime
 
 Base = declarative_base()
 
@@ -71,7 +71,7 @@ class Payment(Base):
     booking = relationship('Booking', back_populates='payments')
     
 
-class Logistics(Base):
+class Logistic(Base):
     __tablename__ = 'logistics'
 
     logistics_id = Column(Integer, primary_key=True)
@@ -81,7 +81,7 @@ class Logistics(Base):
     pickup_date = Column(DateTime, nullable=False)
     dropoff_date = Column(DateTime, nullable=False)
 
-    bookings = relationship('Booking', back_populates='logistics')
+    booking = relationship('Booking', back_populates='logistics')
 
 class Inventory(Base):
     __tablename__ = 'inventory'
@@ -93,7 +93,7 @@ class Inventory(Base):
 
     orders = relationship('Order', back_populates='inventory')  # Se till att Order-klass är korrekt definierad
 
-class Mechanics(Base):
+class Mechanic(Base):
     __tablename__ = 'mechanics'
 
     mechanic_id = Column(Integer, primary_key=True)
@@ -156,9 +156,9 @@ def add_order(booking_id, inventory_id, item_name, quantity, status):
 customer_id= 1
 service_id= 1
 mechanic_id= 1 
-booking_date= "2024-08-30" #format?
+booking_date= datetime.strptime("2024-08-30", "%Y-%m-%d" ) #format?
 status= "pågående"
-add_booking(customer_id, service_id, mechanic_id, booking_date, status, session)
+add_booking(customer_id, service_id, mechanic_id, booking_date, status)
 
 
 #Lägg till order
@@ -167,8 +167,4 @@ inventory_id= 1
 item_name= "avgasrör"
 quantity= 1
 status= "skickad"
-add_order(booking_id, inventory_id, item_name, quantity, status, session)
-
-
-
-
+add_order(booking_id, inventory_id, item_name, quantity, status)
