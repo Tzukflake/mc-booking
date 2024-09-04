@@ -91,7 +91,7 @@ class Inventory(Base):
     quantity = Column(Integer, nullable=False)
     unit_price = Column(Integer, nullable=False)
 
-    orders = relationship('Order', back_populates='inventory')  # Se till att Order-klass är korrekt definierad
+    orders = relationship('Order', back_populates='inventory')  
 
 class Mechanic(Base):
     __tablename__ = 'mechanics'
@@ -131,6 +131,38 @@ def add_booking(customer_id, service_id, mechanic_id, booking_date, status):
     
     print("Bokningen har lagts till framgångsrikt!")
 
+def add_mechanic(name, specialization):
+    new_mechanic = Mechanic(
+        name=name,
+        specialization=specialization
+    )
+
+    session.add(new_mechanic)
+    session.commit()
+    print('Mekaniker har lagts till')
+
+def add_logistic(booking_id, pickup_location,dropoff_location,pickup_date, dropoff_date):
+    new_logistic = Logistic(
+        booking_id=booking_id,
+        pickup_location=pickup_location,
+        dropoff_location=dropoff_location,
+        pickup_date=pickup_date,
+        dropoff_date=dropoff_date,
+    )
+    session.add(new_logistic)
+    session.commit()
+    print('Logistik har lagts till')
+
+def add_inventory(item_name, quantity, unit_price):
+    new_inventory = Inventory(
+        item_name=item_name,
+        quantity=quantity,
+        unit_price=unit_price
+    )
+    session.add(new_inventory)
+    session.commit()
+    print('Lagerstatus har lagts till')
+
 #Lägg till en ny beställning i Order-tabellen
 def add_order(booking_id, inventory_id, item_name, quantity, status):
     # Skapa en ny beställning
@@ -168,3 +200,40 @@ item_name= "avgasrör"
 quantity= 1
 status= "skickad"
 add_order(booking_id, inventory_id, item_name, quantity, status)
+
+
+# Testdata för logistik (logistic)
+add_logistic(
+    booking_id=1,  # Kontrollera att detta booking_id finns i tabellen 'bookings'
+    pickup_location="Kundens hem",
+    dropoff_location="Verkstad",
+    pickup_date=datetime.strptime("2024-09-01 08:00", "%Y-%m-%d %H:%M"),
+    dropoff_date=datetime.strptime("2024-09-01 09:00", "%Y-%m-%d %H:%M")
+)
+
+add_logistic(
+    booking_id=2,  # Kontrollera att detta booking_id finns i tabellen 'bookings'
+    pickup_location="Garage",
+    dropoff_location="Verkstad",
+    pickup_date=datetime.strptime("2024-09-02 10:00", "%Y-%m-%d %H:%M"),
+    dropoff_date=datetime.strptime("2024-09-02 11:30", "%Y-%m-%d %H:%M")
+)
+
+add_logistic(
+    booking_id=3,  # Kontrollera att detta booking_id finns i tabellen 'bookings'
+    pickup_location="Företagsparkering",
+    dropoff_location="Verkstad",
+    pickup_date=datetime.strptime("2024-09-03 07:30", "%Y-%m-%d %H:%M"),
+    dropoff_date=datetime.strptime("2024-09-03 08:30", "%Y-%m-%d %H:%M")
+)
+
+# Testdata för mekaniker
+add_mechanic("Erik Johansson", "Broms- och däckspecialist")
+add_mechanic("Sara Nilsson", "Elektronikspecialist")
+add_mechanic("Mikael Berg", "Kylsystem och klimatanläggning")
+
+# Testdata för inventory (lager)
+add_inventory("Bromsbelägg", 20, 300)
+add_inventory("Tändstift", 50, 40)
+add_inventory("Motorolja", 100, 150)
+
