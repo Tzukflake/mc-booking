@@ -237,3 +237,80 @@ add_inventory("Bromsbelägg", 20, 300)
 add_inventory("Tändstift", 50, 40)
 add_inventory("Motorolja", 100, 150)
 
+def add_service(service_name, description, cost):
+    # Skapa en ny tjänst
+    new_service = Service(
+        service_name=service_name,
+        description=description,
+        cost=cost
+    )
+
+    # Lägg till tjänsten i sessionen
+    session.add(new_service)
+    
+    # Spara ändringar i databasen
+    session.commit()
+    
+    print("Tjänsten har lagts till framgångsrikt!")
+
+def add_customer(first_name, last_name, address, phone, email, motorcycle_model):
+    # Skapa en ny kund
+    new_customer = Customer(
+        first_name=first_name,
+        last_name=last_name,
+        address=address,
+        phone=phone,
+        email=email,
+        motorcycle_model=motorcycle_model
+    )
+
+    # Lägg till kunden i sessionen
+    session.add(new_customer)
+    
+    # Spara ändringar i databasen
+    session.commit()
+    
+    print("Kunden har lagts till framgångsrikt!")
+
+
+def add_payment(booking_id, amount, payment_date, payment_method):
+    # Skapa en ny betalning
+    new_payment = Payment(
+        booking_id=booking_id,
+        amount=amount,
+        payment_date=payment_date,
+        payment_method=payment_method
+    )
+
+    # Lägg till betalningen i sessionen
+    session.add(new_payment)
+    
+    # Spara ändringar i databasen
+    session.commit()
+    
+    print("Betalningen har lagts till framgångsrikt!")
+
+
+
+# Example: Adding a new service
+service_name = "Oil Change"
+description = "Full oil change with synthetic oil"
+cost = 120
+add_service(service_name, description, cost)
+
+# Example: Adding a new customer
+first_name = "John"
+last_name = "Doe"
+address = "1234 Elm Street"
+phone = "123-456-7890"
+email = "john.doe@example.com"
+motorcycle_model = "Harley Davidson"
+add_customer(first_name, last_name, address, phone, email, motorcycle_model)
+
+# Example: Adding a new payment
+booking_id = 1  # Assuming the booking with ID 1 already exists
+amount = 120
+payment_date = datetime.strptime("2024-08-31", "%Y-%m-%d")
+payment_method = "Credit Card"
+add_payment(booking_id, amount, payment_date, payment_method)
+
