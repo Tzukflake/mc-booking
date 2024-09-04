@@ -302,6 +302,7 @@ service_name = "Tire Replacement"
 description = "Complete tire replacement with balancing"
 cost = 200
 add_service(service_name, description, cost)
+
 service_name = "Brake Inspection"
 description = "Comprehensive brake system inspection"
 cost = 85
