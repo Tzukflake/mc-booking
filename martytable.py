@@ -298,6 +298,15 @@ description = "Full oil change with synthetic oil"
 cost = 120
 add_service(service_name, description, cost)
 
+service_name = "Tire Replacement"
+description = "Complete tire replacement with balancing"
+cost = 200
+add_service(service_name, description, cost)
+service_name = "Brake Inspection"
+description = "Comprehensive brake system inspection"
+cost = 85
+add_service(service_name, description, cost)
+
 # Example: Adding a new customer
 first_name = "John"
 last_name = "Doe"
@@ -307,10 +316,39 @@ email = "john.doe@example.com"
 motorcycle_model = "Harley Davidson"
 add_customer(first_name, last_name, address, phone, email, motorcycle_model)
 
+first_name = "Michael"
+last_name = "Williams"
+address = "9101 Oak Lane"
+phone = "555-789-0123"
+email = "michael.williams@example.com"
+motorcycle_model = "Ducati Monster"
+add_customer(first_name, last_name, address, phone, email, motorcycle_model)
+
+first_name = "Emily"
+last_name = "Johnson"
+address = "5678 Maple Avenue"
+phone = "987-654-3210"
+email = "emily.johnson@example.com"
+motorcycle_model = "Yamaha R1"
+add_customer(first_name, last_name, address, phone, email, motorcycle_model)
+
 # Example: Adding a new payment
 booking_id = 1  # Assuming the booking with ID 1 already exists
 amount = 120
 payment_date = datetime.strptime("2024-08-31", "%Y-%m-%d")
 payment_method = "Credit Card"
 add_payment(booking_id, amount, payment_date, payment_method)
+
+booking_id = 2  # Assuming the booking with ID 2 already exists
+amount = 200
+payment_date = datetime.strptime("2024-09-10", "%Y-%m-%d")
+payment_method = "PayPal"
+add_payment(booking_id, amount, payment_date, payment_method)
+
+booking_id = 3  # Assuming the booking with ID 3 already exists
+amount = 85
+payment_date = datetime.strptime("2024-09-25", "%Y-%m-%d")
+payment_method = "Cash"
+add_payment(booking_id, amount, payment_date, payment_method)
+
 
